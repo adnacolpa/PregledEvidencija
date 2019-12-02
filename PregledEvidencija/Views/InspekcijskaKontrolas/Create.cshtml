@@ -1,0 +1,75 @@
+﻿@model PregledEvidencija.ViewModels.InspekcijskaKontrolaViewModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>InspekcijskaKontrola</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.DatumKontrole)
+                @Html.TextBoxFor(model => model.DatumKontrole, new { htmlAttributes = new { @class = "form-control date-picker" } })
+                <span asp-validation-for="DatumKontrole" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.RezultatiKontrole)
+                <input asp-for="RezultatiKontrole" class="form-control" />
+                <span asp-validation-for="RezultatiKontrole" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.ProizvodID)
+                @Html.DropDownList("ProizvodID", Model.ProizvodList,
+    "Izaberite proizvod",
+    new { @class = "form-control" })
+                <span asp-validation-for="ProizvodID" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                @Html.DisplayNameFor(model => model.NadleznoTijeloID)
+                @Html.DropDownList("NadleznoTijeloID", Model.TijeloList,
+    "Izaberite nadležno tijelo",
+    new { @class = "form-control" })
+                <span asp-validation-for="NadleznoTijeloID" class="text-danger"></span>
+            </div>
+            <div class="form-group form-check">
+
+                <input class="form-check-input" asp-for="ProizvodSiguran" />
+                @Html.DisplayNameFor(model => model.ProizvodSiguran)
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+    <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+    <script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-ui-timepicker-addon/1.6.3/jquery-ui-timepicker-addon.min.js"></script>
+   
+    <script type="text/javascript">
+
+        $(document).ready(function () {
+            $("#DatumKontrole").datetimepicker
+                ({
+                    dateFormat: "dd.mm.yy.",
+                    timeFormat:"HH:mm:ss",
+                    timePicker: true,
+                    minDate: -20, maxDate: "+0M +0D"
+                })
+      
+        });
+    </script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

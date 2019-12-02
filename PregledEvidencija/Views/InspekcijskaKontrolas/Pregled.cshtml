@@ -1,0 +1,66 @@
+﻿@model IEnumerable<PregledEvidencija.Models.InspekcijskaKontrola>
+
+@{
+    ViewData["Title"] = "Pregled";
+}
+
+<h1>Pregled</h1>
+
+<p>
+    <!--<a asp-action="Create">Create New</a>-->
+    <div class="form-group">
+        @Html.DropDownList("NadleznoTijeloID", @ViewBag.NadleznaTijela,
+"Izaberite nadležno tijelo",
+new { @class = "form-control" })
+        <a asp-action="Filter" >Filter</a> |
+    </div>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.DatumKontrole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RezultatiKontrole)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProizvodSiguran)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.KontrolisaniProizvod)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.NadleznoTijelo)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.DatumKontrole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RezultatiKontrole)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProizvodSiguran)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.KontrolisaniProizvod.Naziv)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NadleznoTijelo.Naziv)
+            </td>
+
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

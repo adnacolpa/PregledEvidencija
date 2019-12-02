@@ -1,0 +1,70 @@
+﻿@model PregledEvidencija.Models.Proizvod
+
+@{
+    ViewData["Title"] = "Edit";
+}
+@{
+    List<SelectListItem> zemlje = new List<SelectListItem>();
+    zemlje.Add(new SelectListItem
+    {
+        Text = "Bosna i Hercegovina",
+        Value = "Bosna i Hercegovina"
+    });
+    zemlje.Add(new SelectListItem
+    {
+        Text = "Srbija",
+        Value = "Srbija"
+    });
+    zemlje.Add(new SelectListItem
+    {
+        Text = "Makedonija",
+        Value = "Makedonija"
+    });
+}
+<h1>Edit</h1>
+
+<h4>Proizvod</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="ID" />
+            <div class="form-group">
+                <label asp-for="Naziv" class="control-label"></label>
+                <input asp-for="Naziv" class="form-control" />
+                <span asp-validation-for="Naziv" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Proizvodjac" class="control-label"></label>
+                <input asp-for="Proizvodjac" class="form-control" />
+                <span asp-validation-for="Proizvodjac" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SerijskiBroj" class="control-label"></label>
+                <input asp-for="SerijskiBroj" class="form-control" />
+                <span asp-validation-for="SerijskiBroj" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="ZemljaPorijekla" class="control-label"></label>
+                @Html.DropDownList("ZemljaPorijekla", zemlje, new { @class = "form-control" })
+            </div>
+            <div class="form-group">
+                <label asp-for="Opis" class="control-label"></label>
+                <input asp-for="Opis" class="form-control" />
+                <span asp-validation-for="Opis" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
